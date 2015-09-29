@@ -1,0 +1,18 @@
+mixin addScript( src )
+	script(src=src,type="text/javascript")
+	
+mixin addStyle(src)
+	link(href=src,rel="stylesheet")
+
+html
+	head
+		+addScript("/public/jquery/dist/jquery.min.js")
+		+addScript("/public/knockout/dist/knockout.js")
+		
+		+addScript("/public/js/index.js")
+		+addStyle("/public/css/index.css")
+	body
+		h1 Test
+		ul
+			- for( var i = 0; i < 100; i++ )
+				li(data-bind="event:{touchend:onSelectItem,mouseup:onSelectItem}") Item-#{i}

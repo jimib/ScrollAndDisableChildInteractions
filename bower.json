@@ -1,0 +1,23 @@
+{
+  "name": "ScrollWindow",
+  "version": "0.0.0",
+  "authors": [
+    "James Bailey <jimi.bailey@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "knockout": "~3.3.0"
+  }
+}
