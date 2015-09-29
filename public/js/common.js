@@ -116,14 +116,14 @@ $.widget("pixel.scroller", {
 		
 		console.log("implemented scroller");
 		
-		function onScroll(){
+		function onScroll( evt ){
 			if( !isScrolling ){
 				isScrolling = true;
 				$doc.on("touchend", onScrollCancel);
 			}
 		}
 		
-		function onScrollCancel(){
+		function onScrollCancel( evt ){
 			$doc.unbind("touchend", onScrollCancel);
 			if( isScrolling ){
 				isScrolling = false;
