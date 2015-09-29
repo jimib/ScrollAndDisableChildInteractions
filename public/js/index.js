@@ -21,8 +21,8 @@ $(document).ready( function(){
 		if( isScrolling ){
 			isScrolling = false;
 			//try cancelling the event
-			evt.originalEvent.ignore = true;
-			evt.preventDefault();
+			//evt.originalEvent.ignore = true;
+			(evt.originalEvent.cancel || evt.preventDefault)();
 		}
 		
 		

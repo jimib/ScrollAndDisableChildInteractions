@@ -4,11 +4,20 @@ ko.bindingHandlers.eventPreventable = {
 		ko.utils.objectForEach(eventsToHandle, function(eventName) {
 			if (typeof eventName == "string") {
 				ko.utils.registerEventHandler(element, eventName, function (event) {
+					//overwrite this so we can ignore the cancelable : false flag
+					var prevented = false;
+
+					event.originalEvent.cancel = function(){
+						console.log("cancelled");
+						prevented = true;
+						event.preventDefault();
+					}
+
 					//wait a split second giving the root document change to cancel it
 					setTimeout( function(){
 						
-						var prevented = event.isDefaultPrevented() || event.ignore || event.originalEvent.ignore;
-						
+						prevented = prevented || event.isDefaultPrevented();
+
 						if( !prevented ){
 							var handlerReturnValue;
 							var handlerFunction = valueAccessor()[eventName];
