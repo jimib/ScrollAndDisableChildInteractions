@@ -1,5 +1,5 @@
 ko.bindingHandlers.eventPreventable = { 
-	init : function( element, valueAccessor ){
+	init : function( element, valueAccessor, allBindings, viewModel, bindingContext ){
 		var eventsToHandle = valueAccessor() || {};
 		ko.utils.objectForEach(eventsToHandle, function(eventName) {
 			if (typeof eventName == "string") {
