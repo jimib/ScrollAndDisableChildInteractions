@@ -7,8 +7,7 @@ ko.bindingHandlers.eventPreventable = {
 					//wait a split second giving the root document change to cancel it
 					setTimeout( function(){
 						
-						var prevented = (event.originalEvent || event).isDefaultPrevented();
-						console.log("Is default prevented", prevented );
+						var prevented = event.isDefaultPrevented() || event.ignore || event.originalEvent.ignore;
 						
 						if( !prevented ){
 							var handlerReturnValue;

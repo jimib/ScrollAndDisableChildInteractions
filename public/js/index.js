@@ -5,22 +5,27 @@ $(document).ready( function(){
 	ko.applyBindings( modelApp );
 
 	var $ul = $("ul"), $doc = $(document);
+	var isScrolling = false;
 
 	$ul.on("scroll",function(){
-		if( !$ul.hasClass("scrolling") ){
-			$ul.addClass("scrolling");
+		if( !isScrolling ){
+			//$ul.addClass("scrolling");
+			isScrolling = true;
 			$doc.on( "touchend", onScrollStop );
 		}
 	});
 
 	function onScrollStop( evt ){
-		if( $ul.hasClass("scrolling") ){
-			console.log("preventing default");
-			(evt.originalEvent || evt).preventDefault();
-			$ul.removeClass("scrolling");
+		$doc.unbind("touchend",onScrollStop );
+
+		if( isScrolling ){
+			isScrolling = false;
+			//try cancelling the event
+			evt.originalEvent.ignore = true;
+			evt.preventDefault();
 		}
 		
-		$doc.unbind("touchend",onScrollStop );
+		
 	}
 
 
