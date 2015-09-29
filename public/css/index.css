@@ -7,21 +7,10 @@ body {
 ul {
   margin: 0px;
   padding: 0px;
-
   overflow: hidden;
-  overflow-y: auto;
-
-  height: 600px;
+  overflow-y: scroll;
+  height: 300px;
 }
-
-ul.scrolling{
-  border: 20px solid blue;
-}
-
-ul.scrolling li{
-  pointer-events:none;
-}
-
 ul li {
   margin: 0px 0px 10px 0px;
   padding: 10px;
