@@ -7,6 +7,7 @@ mixin addStyle(src)
 html
 	head
 		+addScript("/public/jquery/dist/jquery.min.js")
+		+addScript("/public/jquery-ui/jquery-ui.js")
 		+addScript("/public/knockout/dist/knockout.js")
 		+addScript("/public/js/common.js")
 		
@@ -14,6 +15,6 @@ html
 		+addStyle("/public/css/index.css")
 	body
 		h1 Test
-		ul
+		ul(data-bind="widget:{scroller:{}}")
 			- for( var i = 0; i < 100; i++ )
 				li(data-bind="eventPreventable:{touchend:onSelectItem}") Item-#{i}

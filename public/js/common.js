@@ -55,4 +55,80 @@ ko.bindingHandlers.eventPreventable = {
 	}
 }
 
-console.log("custom bindingss");
+ko.bindingHandlers.widget = {
+	init : function( element, valueAccessor, allBindings, viewModel, bindingContext ){
+	
+		var oElement = element;
+		//reach up to the parent pinpad and get the options from it
+		var widgets = valueAccessor();
+		var $element = $(element);
+		//if this element is called component - then we reach up to our parent
+		if( $element.prop("tagName").toLowerCase() == "component" ){
+			$element = $element.parent();
+			element = $element.get(0);
+		}
+	
+		//build up a list of widgets we can access
+		element.widget = {};
+	
+		for( var id in widgets ){
+			(function(id){
+				var options = widgets[ id ];
+				var optionsCustom = {};
+		
+				//read the custom parameters the user passed through
+				try{
+					eval( "optionsCustom = {" +$element.attr("options") + "}" );
+				}catch(err){
+					console.log("Unable to parse parent options", err);
+				}
+	
+				//merge these values
+				for( var property in optionsCustom ){
+					options[property] = optionsCustom[property];
+				}
+		
+				//add the model to the options
+				options.viewModel = viewModel;
+		
+				//apply the widget
+				try{
+					$( element )[id]( options );
+					element.widget[id] = function(){
+						$( element )[id].apply( $( element ), arguments );
+					}
+				}catch(err){
+					console.error("Failed to bind widget '"+id+"'", err);
+				}
+			})(id);
+		}
+	
+	}
+}
+
+$.widget("pixel.scroller", {
+	_init : function(){
+		var self = this;
+		
+		self.element.on("scroll", onScroll);
+		
+		var $doc = $(document), isScrolling = false;
+		
+		console.log("implemented scroller");
+		
+		function onScroll(){
+			if( !isScrolling ){
+				isScrolling = true;
+				$doc.on("touchend", onScrollCancel);
+			}
+		}
+		
+		function onScrollCancel(){
+			$doc.unbind("touchend", onScrollCancel);
+			if( isScrolling ){
+				isScrolling = false;
+				(evt.originalEvent.cancel || evt.preventDefault)();
+			}
+		}
+	}
+})
