@@ -9,9 +9,11 @@ ul {
   padding: 0px;
   overflow: hidden;
   overflow-y: scroll;
-  height: 300px;
+  height: 900px;
 }
-
+ul.scrolling {
+  border: 2px solid #00f;
+}
 ul li {
   margin: 0px 0px 10px 0px;
   padding: 10px;
