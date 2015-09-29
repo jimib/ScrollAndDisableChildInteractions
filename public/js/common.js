@@ -1,13 +1,12 @@
 ko.bindingHandlers.eventPreventable = { 
 	init : function( element, valueAccessor ){
-		console.log("eventPreventable");
 		var eventsToHandle = valueAccessor() || {};
 		ko.utils.objectForEach(eventsToHandle, function(eventName) {
 			if (typeof eventName == "string") {
 				ko.utils.registerEventHandler(element, eventName, function (event) {
 					//wait a split second giving the root document change to cancel it
 					setTimeout( function(){
-						if( !evt.isDefaultPrevented() ){
+						if( !event.isDefaultPrevented() ){
 							var handlerReturnValue;
 							var handlerFunction = valueAccessor()[eventName];
 							if (!handlerFunction)
