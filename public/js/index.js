@@ -16,7 +16,7 @@ $(document).ready( function(){
 	function onScrollStop( evt ){
 		if( $ul.hasClass("scrolling") ){
 			console.log("preventing default");
-			evt.preventDefault();
+			(evt.originalEvent || evt).preventDefault();
 			$ul.removeClass("scrolling");
 		}
 		
